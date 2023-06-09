@@ -4,20 +4,20 @@
     <el-form  :model="queryParams" ref="queryForm"
       :inline="true" v-show="showSearch">
       <el-form-item  prop="userName">
-        <el-input v-model="queryParams.userName" placeholder="课程发布用户ID" clearable  style="width: 220px"
+        <el-input v-model="queryParams.userName" :placeholder="$t('KCFBYHID')" clearable  style="width: 220px"
           @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item  prop="nickName">
-        <el-input v-model="queryParams.nickName" :placeholder="$t('课程发布用户昵称')" clearable  style="width: 220px"
+        <el-input v-model="queryParams.nickName" :placeholder="$t('KCFBYHNC')" clearable  style="width: 220px"
           @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item  prop="nickName">
-        <el-input v-model="queryParams.nickName" :placeholder="$t('课程发布用户邮箱')" clearable  style="width: 220px"
+        <el-input v-model="queryParams.nickName" :placeholder="$t('KCFBYHYX')" clearable  style="width: 220px"
           @keyup.enter.native="handleQuery" />
       </el-form-item>
 
       <el-form-item prop="roleId">
-        <el-select v-model="queryParams.roleId" :placeholder="$t('排序')" >
+        <el-select v-model="queryParams.roleId" :placeholder="$t('Sorting')" >
           <el-option v-for="item in roleOptions" :key="item.roleId" :label="item.roleName" :value="item.roleId"
             :disabled="item.status == 1"></el-option>
         </el-select>
@@ -53,19 +53,19 @@
       <el-table v-loading="loading"   :default-sort = "{prop: 'date', order: 'descending'}" :data="userList" @selection-change="handleSelectionChange"
         :row-class-name="tableRowClassName" :header-cell-style="{ 'background-color': '#EDF4FC' }">
 
-        <el-table-column :label="$t('number')" align="center" key="userId" prop="userId" />
+        <el-table-column :label="$t('number')" align="center" width="110" prop="userId" />
 
-        <el-table-column label="课程应收墨水" sortable align="center" key="nickName" prop="nickName"
+        <el-table-column :label="$t('COURSE_INK_R')" sortable align="center"  width="220" key="nickName" prop="nickName"
           :show-overflow-tooltip="true" />
-          <el-table-column label="使用优惠券"  align="center" key="phonenumber" prop="phonenumber" />
-          <el-table-column :label="$t('优惠券抵扣墨水')" sortable align="center" key="phonenumber" prop="phonenumber" />
-          <el-table-column :label="$t('实付墨水')" sortable align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('佣金墨水')" sortable align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('收益墨水')" sortable align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('购买用户ID')"  align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('购买用户昵称')"  align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('购买用户邮箱')"  align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('支付时间  ')" sortable align="center" key="phonenumber" prop="phonenumber" />
+          <el-table-column :label="$t('USE_COUPONS')"  align="center" width="220" show-overflow-tooltip="true" prop="phonenumber" />
+          <el-table-column :label="$t('COUPON_INK')" sortable align="center" width="220" show-overflow-tooltip="true" prop="phonenumber" />
+          <el-table-column :label="$t('ACTUAL_INK')" sortable align="center"  show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('SHARE_INK')" sortable align="center"  show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('REVENUE_INK')" sortable align="center" width="120" show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('GMYHID')"  align="center" show-overflow-tooltip="true" width="220" prop="phonenumber" />
+        <el-table-column :label="$t('GMYHNC')"  align="center" show-overflow-tooltip="true" width="220" prop="phonenumber" />
+        <el-table-column :label="$t('GMYHYX')"  align="center" show-overflow-tooltip="true" width="220" prop="phonenumber" />
+        <el-table-column :label="$t('TIME_OF_PAY')" sortable align="center" show-overflow-tooltip="true" width="220" prop="phonenumber" />
       </el-table>
 
       <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"

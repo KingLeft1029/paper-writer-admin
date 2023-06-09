@@ -109,7 +109,7 @@ if(Cookies.get("language")){
 }else{
   Cookies.set("language",'en')
 }
-
+store.commit('SET_LANG', Cookies.get("language"));
 
 Vue.use(Element, {
   size: Cookies.get('size') || 'small', // set element-ui default size

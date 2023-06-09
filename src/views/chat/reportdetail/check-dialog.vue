@@ -1,31 +1,31 @@
 <!--  -->
 <template>
-  <el-dialog :title="title" :visible.sync="show" width="700px" append-to-body>
+  <el-dialog :title="title" :visible.sync="show" width="750px" append-to-body>
     <div class="dialog-box">
-      <el-form label-position="right" ref="form" :model="form" :rules="rules" label-width="120px">
-        <el-form-item :label="$t('群聊名称')" required>
+      <el-form label-position="right" ref="form" :model="form" :rules="rules" label-width="180px">
+        <el-form-item :label="$t('QUN_M')+'：'" required>
           xxxx
         </el-form-item>
-        <el-form-item :label="$t('群聊人数')" required>
+        <el-form-item :label="$t('QUN_R')+'：'" required>
           xxxx
         </el-form-item>
-        <el-form-item :label="$t('群主')" required>
+        <el-form-item :label="$t('QUN_Z')+'：'" required>
           xxxx
         </el-form-item>
-        <el-form-item :label="$t('状态')" required>
+        <el-form-item :label="$t('Status')+'：'" required>
           xxxx
         </el-form-item>
-        <el-form-item :label="$t('举报人数')" required>
+        <el-form-item :label="$t('JBRS')+'：'" required>
           xxxx
         </el-form-item>
-        <el-form-item :label="$t('举报原因')" required>
-          <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="textarea">
+        <el-form-item :label="$t('JBYY')+'：'" required>
+          <el-input type="textarea" disabled :rows="2" :placeholder="$t('Enter')" v-model="textarea">
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('举报图片')" required>
+        <el-form-item :label="$t('JBTP')+'：'" required>
 <div class="img-report" ></div>
         </el-form-item>
-        <el-form-item :label="$t('举报时间')" required>
+        <el-form-item :label="$t('JBSJ')+'：'" required>
           xxxx
         </el-form-item>
       </el-form>
@@ -41,7 +41,7 @@ export default {
   components: {},
   data() {
     return {
-      title: '查看',
+      title: this.$t('View'),
       show: false,
       form: {
         radio: 1
@@ -50,8 +50,8 @@ export default {
         userName: [
           {
             required: true,
-            message: this.$t("PLEASE_SELECT_WHETHER"),
-            trigger: "change",
+            message: this.$t("BNWK"),
+            trigger: "blur",
           },
         ],
 
@@ -71,26 +71,7 @@ export default {
       };
       this.resetForm("form");
     },
-    /** 提交按钮 */
-    submitForm: function () {
-      this.$refs["form"].validate((valid) => {
-        if (valid) {
-          if (this.form.userId != undefined) {
-            updateUser(this.form).then((response) => {
-              this.$modal.msgSuccess(this.$t("UPDATED_SUCCESS"));
-              this.open = false;
-              this.getList();
-            });
-          } else {
-            addUser(this.form).then((response) => {
-              this.$modal.msgSuccess(this.$t("ADD_SUCCESS"));
-              this.open = false;
-              this.getList();
-            });
-          }
-        }
-      });
-    },
+
     // 取消按钮
     cancel() {
       this.show = false;

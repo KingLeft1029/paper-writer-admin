@@ -2,10 +2,10 @@
 <template>
   <el-dialog :title="title" :visible.sync="show" width="700px" append-to-body>
     <div class="dialog-box">
-      <el-form label-position="right" ref="form" :model="form" :rules="rules" label-width="120px">
-        <el-form-item :label="$t('IDENTIFY')" prop="userName">
+      <el-form label-position="right" ref="form" :model="form" :rules="rules" label-width="130px">
+        <el-form-item :label="$t('IDENTIFY')+'：'" prop="userName">
           <el-radio-group v-model="form.radio">
-            <el-radio :label="1">机构官方</el-radio>
+            <el-radio :label="1">{{ $t('JGGF') }}</el-radio>
             <el-radio :label="2">{{ $t('SPECIAL_SUBSCRIBER') }}</el-radio>
           </el-radio-group>
         </el-form-item>
@@ -29,7 +29,7 @@ export default {
   components: {},
   data() {
     return {
-      title: '修改用户身份',
+      title:this.$t('XGYHSF'),
       show: false,
       form: {
         radio: 1

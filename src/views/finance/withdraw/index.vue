@@ -41,7 +41,7 @@
     <div  >
       <el-row :gutter="10" class="mb8" >
         <el-col :span="1.5"  class="mt5">
-          {{ $t('Total') }}5{{ $t('data') }}
+          {{ $t('Total') }} 5 {{ $t('data') }}
         </el-col>
         <el-col :span="1.5">
           <el-button type="warning" plain icon="iconfont icon-daochu"  @click="handleExport">{{ $t("Export")
@@ -53,16 +53,16 @@
       <el-table v-loading="loading"   :default-sort = "{prop: 'date', order: 'descending'}" :data="userList" @selection-change="handleSelectionChange"
         :row-class-name="tableRowClassName" :header-cell-style="{ 'background-color': '#EDF4FC' }">
 
-        <el-table-column :label="$t('SER_NUM')" align="center" key="userId" prop="userId" />
+        <el-table-column :label="$t('SER_NUM')" align="center" width="110" prop="userId" />
 
-        <el-table-column label="提现墨水" sortable align="center" key="nickName" prop="nickName"
+        <el-table-column :label="$t('TXMS')"  width="100" sortable align="center"  prop="nickName"
           :show-overflow-tooltip="true" />
-          <el-table-column :label="$t('WITH_A')" sortable align="center" key="phonenumber" prop="phonenumber" />
-          <el-table-column :label="$t('UserID')"  align="center" key="phonenumber" prop="phonenumber" />
-          <el-table-column :label="$t('Nickname')"  align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('WITH_Q')"  align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('WITH_Z')"  align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('WITH_S')"  align="center" key="phonenumber" prop="phonenumber" />
+          <el-table-column :label="$t('WITH_A')" sortable align="center" width="220" show-overflow-tooltip="true" prop="phonenumber" />
+          <el-table-column :label="$t('UserID')"  align="center" show-overflow-tooltip="true" prop="phonenumber" />
+          <el-table-column :label="$t('Nickname')" width="100"   align="center" show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('WITH_Q')"  align="center"  width="220" show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('WITH_Z')"  align="center" show-overflow-tooltip="true"  width="290" prop="phonenumber" />
+        <el-table-column :label="$t('WITH_S')"  align="center" show-overflow-tooltip="true" width="160"  prop="phonenumber" />
 
       </el-table>
 

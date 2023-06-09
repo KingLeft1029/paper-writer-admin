@@ -1,6 +1,6 @@
 import { login, logout, getInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
-
+import Cookies from 'js-cookie'
 const user = {
   state: {
     token: getToken(),
@@ -9,7 +9,8 @@ const user = {
     roles: [],
     permissions: [],
     shopId: '',
-    deptId: ''
+    deptId: '',
+    language:Cookies.get("language")
   },
 
   mutations: {
@@ -33,6 +34,9 @@ const user = {
     },
     SET_DEPTID: (state, deptId) => {
       state.deptId = deptId
+    },
+    SET_LANG: (state, language) => {
+      state.language = language
     }
   },
 

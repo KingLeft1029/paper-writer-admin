@@ -27,7 +27,7 @@
         <el-col :lg="2" :md="2">
           <el-upload action="#" :http-request="requestUpload" :show-file-list="false" :before-upload="beforeUpload">
             <el-button >
-              Select
+              {{$t('Select')}}
               <i class="el-icon-upload el-icon--right"></i>
             </el-button>
           </el-upload>
@@ -45,7 +45,7 @@
           <el-button icon="el-icon-refresh-right"  @click="rotateRight()"></el-button>
         </el-col>
         <el-col :lg="{span: 2, offset: 6}" :md="2">
-          <el-button type="primary"  @click="uploadImg()">提 交</el-button>
+          <el-button type="primary"  @click="uploadImg()">{{ $t('Submit') }}</el-button>
         </el-col>
       </el-row>
     </el-dialog>
@@ -110,7 +110,7 @@ export default {
     // 上传预处理
     beforeUpload(file) {
       if (file.type.indexOf("image/") == -1) {
-        this.$modal.msgError("文件格式错误，请上传图片类型,如：JPG，PNG后缀的文件。");
+        this.$modal.msgError(this.$t('WJGSCW'));
       } else {
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -128,7 +128,7 @@ export default {
           this.open = false;
           this.options.img = window.g.api + response.imgUrl;
           store.commit('SET_AVATAR', this.options.img);
-          this.$modal.msgSuccess("修改成功");
+          this.$modal.msgSuccess(this.$t('OPERTATE_SUCCESS'));
           this.visible = false;
         });
       });

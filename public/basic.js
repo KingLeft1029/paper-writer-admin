@@ -10,7 +10,7 @@
 let origin=location.origin;//为了使用多网卡环境
 let path="/robot";
 let server_api=origin+path;
-server_api="http://192.168.20.222:8888"//生产环境需要注释该行
+// server_api="http://192.168.20.222:8888"//生产环境需要注释该行
 window.g = {
   //访问接口
   api: 'http://101.42.37.240:20014'

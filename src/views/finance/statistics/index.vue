@@ -41,7 +41,7 @@
     <div  >
       <el-row :gutter="10" class="mb8" >
         <el-col :span="1.5"  class="mt5">
-          {{ $t('Total') }}5{{ $t('data') }}
+          {{ $t('Total') }} 5 {{ $t('data') }}
         </el-col>
         <el-col :span="1.5">
           <el-button type="warning" plain icon="iconfont icon-daochu"  @click="handleExport">{{ $t("Export")
@@ -53,22 +53,22 @@
       <el-table v-loading="loading"   :default-sort = "{prop: 'date', order: 'descending'}" :data="userList" @selection-change="handleSelectionChange"
         :row-class-name="tableRowClassName" :header-cell-style="{ 'background-color': '#EDF4FC' }">
 
-        <el-table-column :label="$t('SER_NUM')" align="center" key="userId" prop="userId" />
+        <el-table-column :label="$t('SER_NUM')" align="center" width="110" prop="userId" />
 
-        <el-table-column :label="$t('UserID')"   align="center" key="nickName" prop="nickName"
+        <el-table-column :label="$t('UserID')"   align="center"  prop="nickName"
           :show-overflow-tooltip="true" />
-          <el-table-column :label="$t('Nickname')"   align="center" key="phonenumber" prop="phonenumber" />
-          <el-table-column :label="$t('Email')"  align="center" key="phonenumber" prop="phonenumber" />
-          <el-table-column :label="$t('JGMC')"  align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('COURSE_INK_R')" sortable  align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('COUPON_INK')" sortable align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('ACTUAL_INK')" sortable align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('REVENUE_INK')" sortable align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('SHARE_INK')" sortable align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('支付TIME_OF_PAY时间')" sortable align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Operate')" align="center" fixed="right" class-name="small-padding fixed-width">
-          <template slot-scope="scope" v-if="scope.row.userId !== 1">
-            <el-button  type="text" icon="el-icon-edit"
+          <el-table-column :label="$t('Nickname')"  width="110"   align="center" show-overflow-tooltip="true" prop="phonenumber" />
+          <el-table-column :label="$t('Email')"   width="180" align="center" show-overflow-tooltip="true" prop="phonenumber" />
+          <el-table-column :label="$t('JGMC')"  align="center"  width="180" show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('COURSE_INK_R')"  width="220" sortable  align="center" show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('COUPON_INK')" sortable  width="220" align="center" show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('ACTUAL_INK')" sortable align="center" show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('REVENUE_INK')" sortable align="center"  width="220" show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('SHARE_INK')" sortable align="center" show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('TIME_OF_PAY')" sortable align="center"  width="220" show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('Operate')" align="center" fixed="right" width="150" class-name="small-padding fixed-width">
+          <template slot-scope="scope" >
+            <el-button  type="text" icon="el-icon-view"
               @click="handleCheck(scope.row)">{{ $t("VIEW_D") }}
             </el-button>
 

@@ -8,7 +8,7 @@
       </el-form-item>
 
       <el-form-item prop="roleId">
-        <el-select v-model="queryParams.roleId" :placeholder="$t('操作人')" >
+        <el-select v-model="queryParams.roleId" :placeholder="$t('Operators')" >
           <el-option v-for="item in roleOptions" :key="item.roleId" :label="item.roleName" :value="item.roleId"
             :disabled="item.status == 1"></el-option>
         </el-select>

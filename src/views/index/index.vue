@@ -53,48 +53,48 @@
       <el-col :span="8">
         <div class="grid-content border-left">
           <div class="flex flex-column justify-between ">
-            <div class="grey ">{{$t('NEW_YESTER')}}</div>
-            <div class="black mt20">170</div>
-            <div class="grey mt20">{{ $t('NEW_LAST') }}</div>
-            <div class="black mt20">170</div>
+            <div class="grey " :title="$t('NEW_YESTER')">{{$t('NEW_YESTER')}}</div>
+            <div class="black ">110</div>
+            <div class="grey " :title="$t('NEW_LAST')">{{ $t('NEW_LAST') }}</div>
+            <div class="black ">120</div>
           </div>
           <div>
-            <div class="grey">{{ $t('NEW_PAST') }}</div>
-            <div class="black mt20">170</div>
-            <div class="grey mt20">{{ $t('CUMU') }}</div>
-            <div class="black mt20">170</div>
-          </div>
-        </div>
-      </el-col>
-      <el-col :span="8">
-        <div class="grid-content border-left">
-          <div class="flex flex-column justify-between ">
-            <div class="grey ">{{ $t('TOP_YE') }}</div>
-            <div class="black mt20">170</div>
-            <div class="grey mt20">{{ $t('TOP_30') }}</div>
-            <div class="black mt20">170</div>
-          </div>
-          <div>
-            <div class="grey"> {{$t('TOP_7')}}</div>
-            <div class="black mt20">170</div>
-            <div class="grey mt20">{{$t('TOP_P')}}</div>
-            <div class="black mt20">170</div>
-          </div>
-        </div>
-      </el-col>
-      <el-col :span="8">
-        <div class="grid-content border-left">
-          <div class="flex flex-column justify-between ">
+            <div class="grey" :title="$t('NEW_PAST')">{{ $t('NEW_PAST') }}</div>
+            <div class="black ">170</div>
             <div class="grey ">{{ $t('AMOUT') }}</div>
-            <div class="black mt20">170</div>
-            <div class="grey mt20">{{ $t('AMOUT_30') }}</div>
-            <div class="black mt20">170</div>
+            <div class="black " :title="$t('AMOUT')">170</div>
+          </div>
+        </div>
+      </el-col>
+      <el-col :span="8">
+        <div class="grid-content border-left">
+          <div class="flex flex-column justify-between ">
+            <div class="grey " :title="$t('TOP_YE')">{{ $t('TOP_YE') }}</div>
+            <div class="black ">170</div>
+            <div class="grey " :title="$t('TOP_30')">{{ $t('TOP_30') }}</div>
+            <div class="black ">170</div>
           </div>
           <div>
-            <div class="grey">{{ $t('VIDEO_7') }}</div>
-            <div class="black mt20">170</div>
-            <div class="grey mt20">{{$t('CUMN_RE')}}</div>
-            <div class="black mt20">170</div>
+            <div class="grey" :title="$t('TOP_7')"> {{$t('TOP_7')}}</div>
+            <div class="black ">170</div>
+            <div class="grey " :title="$t('TOP_P')">{{$t('TOP_P')}}</div>
+            <div class="black ">170</div>
+          </div>
+        </div>
+      </el-col>
+      <el-col :span="8">
+        <div class="grid-content border-left">
+          <div class="flex flex-column justify-between ">
+            <div class="grey " :title="$t('AMOUT')">{{ $t('AMOUT') }}</div>
+            <div class="black ">170</div>
+            <div class="grey " :title="$t('AMOUT_30')">{{ $t('AMOUT_30') }}</div>
+            <div class="black ">170</div>
+          </div>
+          <div>
+            <div class="grey" :title="$t('VIDEO_7')">{{ $t('VIDEO_7') }}</div>
+            <div class="black ">170</div>
+            <div class="grey " :title="$t('CUMN_RE')">{{$t('CUMN_RE')}}</div>
+            <div class="black ">170</div>
           </div>
         </div>
       </el-col>
@@ -103,32 +103,32 @@
       <el-col :span="8">
         <div class="grid-content border-left pink">
           <div class="flex flex-column justify-between ">
-            <div class="grey ">{{ $t('YE_VIDEO') }}</div>
-            <div class="black mt20">170</div>
-            <div class="grey mt20">{{ $t('VIDEO_30') }}</div>
-            <div class="black mt20">170</div>
+            <div class="grey " :title="$t('YE_VIDEO')">{{ $t('YE_VIDEO') }}</div>
+            <div class="black ">170</div>
+            <div class="grey " :title="$t('VIDEO_30')">{{ $t('VIDEO_30') }}</div>
+            <div class="black ">170</div>
           </div>
           <div>
-            <div class="grey">{{ $t('VIDEO_7') }} </div>
-            <div class="black mt20">170</div>
-            <div class="grey mt20">{{ $t('VIDEO_IN') }}</div>
-            <div class="black mt20">170</div>
+            <div class="grey" :title="$t('VIDEO_7')">{{ $t('VIDEO_7') }} </div>
+            <div class="black ">170</div>
+            <div class="grey " :title="$t('VIDEO_IN')">{{ $t('VIDEO_IN') }}</div>
+            <div class="black ">170</div>
           </div>
         </div>
       </el-col>
       <el-col :span="8">
         <div class="grid-content border-left pink">
           <div class="flex flex-column justify-between ">
-            <div class="grey ">{{ $t('THREAD_IN') }}</div>
-            <div class="black mt20">170</div>
-            <div class="grey mt20">{{ $t('THREAD_30') }}</div>
-            <div class="black mt20">170</div>
+            <div class="grey " :title="$t('THREAD_IN')">{{ $t('THREAD_IN') }}</div>
+            <div class="black ">170</div>
+            <div class="grey " :title="$t('THREAD_30')">{{ $t('THREAD_30') }}</div>
+            <div class="black ">170</div>
           </div>
           <div>
-            <div class="grey"> {{ $t('THREAD_7') }}</div>
-            <div class="black mt20">170</div>
-            <div class="grey mt20"> {{ $t('THREAD_IN_CUM') }}</div>
-            <div class="black mt20">170</div>
+            <div class="grey" :title="$t('THREAD_7')"> {{ $t('THREAD_7') }}</div>
+            <div class="black ">170</div>
+            <div class="grey " :title="$t('THREAD_IN_CUM')"> {{ $t('THREAD_IN_CUM') }}</div>
+            <div class="black ">170</div>
           </div>
         </div>
       </el-col>
@@ -328,7 +328,7 @@ export default {
 
 .index-container {
   width: 100%;
-  padding: 87px;
+  padding: 56px;
   background-color: #fff;
 
   .avatar-box {
@@ -376,10 +376,10 @@ export default {
   min-height: 165px;
   color: #fff;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  padding: 45px 50px !important;
-  padding-right: 70px !important;
+  // padding: 42px 38px !important;
+  // padding-right: 70px !important;
 
   .num-word {
     font-size: 28px;
@@ -392,17 +392,27 @@ export default {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   box-shadow: 2px 2px 10px #e9e8e8;
-  padding-top: 15px !important;
-  padding-bottom: 15px !important;
   border-left: 5px solid rgb(90, 216, 166);
+  padding: 24px 28px !important;
+  padding-bottom: 0 !important;
 
   .grey {
     color: #979393;
+    width: 100%;
+  // border: 1px solid red;
+  height: 38px;
+  padding-bottom: 20px;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
   }
 
   .black {
     color: #444444;
     font-weight: bold;
+    margin-bottom: 20px;
   }
 }
 

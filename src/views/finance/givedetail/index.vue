@@ -4,15 +4,15 @@
     <el-form  :model="queryParams" ref="queryForm"
       :inline="true" v-show="showSearch">
       <el-form-item  prop="userName">
-        <el-input v-model="queryParams.userName" :placeholder="$t('UserID')" clearable  style="width: 220px"
+        <el-input v-model="queryParams.userName" :placeholder="$t('DSYHID')" clearable  style="width: 220px"
           @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item  prop="nickName">
-        <el-input v-model="queryParams.nickName" :placeholder="$t('Nickname')" clearable  style="width: 220px"
+        <el-input v-model="queryParams.nickName" :placeholder="$t('DSYHNC')" clearable  style="width: 220px"
           @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item  prop="nickName">
-        <el-input v-model="queryParams.nickName" :placeholder="$t('Email')" clearable  style="width: 220px"
+        <el-input v-model="queryParams.nickName" :placeholder="$t('DSYHYX')" clearable  style="width: 220px"
           @keyup.enter.native="handleQuery" />
       </el-form-item>
 
@@ -41,7 +41,7 @@
     <div  >
       <el-row :gutter="10" class="mb8" >
         <el-col :span="1.5"  class="mt5">
-          {{ $t('TOTAL_DATA') }}条
+          {{ $t('Total') }} 5 {{ $t('data') }}
         </el-col>
         <el-col :span="1.5">
           <el-button type="warning" plain icon="iconfont icon-daochu"  @click="handleExport">{{ $t("Export")
@@ -53,16 +53,16 @@
       <el-table v-loading="loading"   :default-sort = "{prop: 'date', order: 'descending'}" :data="userList" @selection-change="handleSelectionChange"
         :row-class-name="tableRowClassName" :header-cell-style="{ 'background-color': '#EDF4FC' }">
 
-        <el-table-column :label="$t(' SER_NUM')" align="center" key="userId" prop="userId" />
+        <el-table-column :label="$t(' SER_NUM')" align="center" prop="userId" />
 
-        <el-table-column :label="$t('Inkjet')" sortable align="center" key="nickName" prop="nickName"
+        <el-table-column :label="$t('Inkjet')" sortable align="center"  prop="nickName"
           :show-overflow-tooltip="true" />
-          <el-table-column :label="$t('SHARE_INK')" sortable align="center" key="phonenumber" prop="phonenumber" />
-          <el-table-column :label="$t('REVENUE_INK')" sortable align="center" key="phonenumber" prop="phonenumber" />
-          <el-table-column :label="$t('UserID')" align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Nickname')" align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Email')" sortable align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('REWARD_TIME')" sortable align="center" key="phonenumber" prop="phonenumber" />
+          <el-table-column :label="$t('SHARE_INK')" sortable align="center" show-overflow-tooltip="true" prop="phonenumber" />
+          <el-table-column :label="$t('REVENUE_INK')" sortable align="center" show-overflow-tooltip="true" prop="phonenumber" />
+          <el-table-column :label="$t('UserID')" align="center" show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('Nickname')" align="center" show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('Email')" sortable align="center" show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('REWARD_TIME')" sortable align="center" show-overflow-tooltip="true"  prop="phonenumber" />
 
       </el-table>
 

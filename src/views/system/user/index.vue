@@ -184,6 +184,7 @@
         <el-table-column
           :label="$t('Operate')"
           align="center"
+          width="190"
           class-name="small-padding fixed-width"
         >
           <template slot-scope="scope" v-if="scope.row.userId !== 1">

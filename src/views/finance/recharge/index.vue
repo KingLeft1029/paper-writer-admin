@@ -36,7 +36,7 @@
     <div  >
       <el-row :gutter="10" class="mb8" >
         <el-col :span="1.5"  class="mt5">
-          {{ $t('Total') }}5{{ $t('data') }}
+          {{ $t('Total') }} 5 {{ $t('data') }}
         </el-col>
         <el-col :span="1.5">
           <el-button type="warning" plain icon="iconfont icon-daochu"  @click="handleExport">{{ $t("Export")
@@ -48,15 +48,15 @@
       <el-table v-loading="loading"   :default-sort = "{prop: 'date', order: 'descending'}" :data="userList" @selection-change="handleSelectionChange"
         :row-class-name="tableRowClassName" :header-cell-style="{ 'background-color': '#EDF4FC' }">
 
-        <el-table-column :label="$t(' SER_NUM')" align="center" key="userId" prop="userId" />
+        <el-table-column :label="$t(' SER_NUM')" align="center" width="110" prop="userId" />
 
-        <el-table-column :label="$t('RE_A') " sortable align="center" key="nickName" prop="nickName"
+        <el-table-column :label="$t('RE_A') " sortable align="center" width="220" key="nickName" prop="nickName"
           :show-overflow-tooltip="true" />
-          <el-table-column label="RECHAGE_INK" sortable  align="center" key="phonenumber" prop="phonenumber" />
-          <el-table-column :label="$t('UserID')"  align="center" key="phonenumber" prop="phonenumber" />
-          <el-table-column :label="$t('Nickname')"  align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Email')"  align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('RE_S')" sortable align="center" key="phonenumber" prop="phonenumber" />
+          <el-table-column label="RECHAGE_INK" sortable  align="center" width="220" show-overflow-tooltip="true" prop="phonenumber" />
+          <el-table-column :label="$t('UserID')"  align="center" show-overflow-tooltip="true" prop="phonenumber" />
+          <el-table-column :label="$t('Nickname')" width="120"  align="center" show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('Email')"  align="center" show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('RE_S')" sortable align="center" width="140"  show-overflow-tooltip="true" prop="phonenumber" />
       </el-table>
 
       <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"

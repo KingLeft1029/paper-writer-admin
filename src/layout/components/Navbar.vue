@@ -78,6 +78,7 @@
 </template>
 
 <script>
+import store from "@/store";
 import { mapGetters } from "vuex";
 import Breadcrumb from "@/components/Breadcrumb";
 import TopNav from "@/components/TopNav";
@@ -126,6 +127,7 @@ export default {
     language(val) {
 
       Cookies.set("language", val);
+      store.commit('SET_LANG', val);
       this.$i18n.locale = val;
       document.title=this.$t('MZZJ_TITLE')
 

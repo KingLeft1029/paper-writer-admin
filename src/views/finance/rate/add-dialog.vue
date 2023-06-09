@@ -2,13 +2,13 @@
 <template>
   <el-dialog :title="title" :visible.sync="show" width="720px" append-to-body>
     <div class="dialog-box">
-      <el-form label-position="right" ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item :label="$t('CONFIG_P')" prop="userName" style="position:relative">
-          <el-input v-model="form.rate" placeholder="佣金比例" clearable
+      <el-form label-position="right" ref="form" :model="form" :rules="rules" label-width="180px">
+        <el-form-item :label="$t('CONFIG_P')+':'" prop="userName" style="position:relative">
+          <el-input v-model="form.rate" :placeholder="$t('CONFIG_P')" clearable
            />
            <div class="rate-box">%</div>
         </el-form-item>
-        <p>{{ $t('DES') }}</p>
+        <p class="p-word" v-html="$t('DES')"></p>
       </el-form>
     </div>
     <div slot="footer" class="dialog-footer">
@@ -49,9 +49,9 @@ export default {
   methods: {
     open(num) {
       if (num == 1) {
-        this.title = '配置文章佣金比例'
+        this.title =this.$t('CONFIG_A')
       } else {
-        this.title = '配置课程佣金比例'
+        this.title = this.$t('CONFIG_C')
       }
       this.show = true
     },
@@ -106,6 +106,9 @@ width: 32px;
 text-align: center;
   line-height: 31px;
   border-left: 1px solid #DCDFE6;
+}
+.p-word{
+  line-height: 24px;
 }
 /* @import url(); 引入公共css类 */
 </style>

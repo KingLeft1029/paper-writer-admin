@@ -1,20 +1,19 @@
 <template>
   <div class="app-container">
     <!--用户数据-->
-    <el-form  :model="queryParams" ref="queryForm"
-      :inline="true" v-show="showSearch">
-      <el-form-item  prop="userName">
-        <el-input v-model="queryParams.userName"  :placeholder="$t('UserID')" clearable  style="width: 220px"
+    <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch">
+      <el-form-item prop="userName">
+        <el-input v-model="queryParams.userName" :placeholder="$t('UserID')" clearable style="width: 220px"
           @keyup.enter.native="handleQuery" />
       </el-form-item>
-      <el-form-item  prop="nickName">
-        <el-input v-model="queryParams.nickName" :placeholder="$t('Nickname')" clearable  style="width: 220px"
+      <el-form-item prop="nickName">
+        <el-input v-model="queryParams.nickName" :placeholder="$t('Nickname')" clearable style="width: 220px"
           @keyup.enter.native="handleQuery" />
       </el-form-item>
 
-      <el-form-item  prop="phonenumber">
-        <el-input v-model="queryParams.phonenumber" :placeholder="$t('Email')" clearable
-          style="width: 220px" @keyup.enter.native="handleQuery" />
+      <el-form-item prop="phonenumber">
+        <el-input v-model="queryParams.phonenumber" :placeholder="$t('Email')" clearable style="width: 220px"
+          @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item prop="roleId">
         <el-select v-model="queryParams.roleId" :placeholder="$t('FULL_USER_INDENTIFY')">
@@ -23,7 +22,7 @@
         </el-select>
       </el-form-item>
       <el-form-item prop="status">
-        <el-select v-model="queryParams.status" :placeholder="$t('Status')" clearable  style="width: 220px">
+        <el-select v-model="queryParams.status" :placeholder="$t('Status')" clearable style="width: 220px">
           <el-option :label="$t('ALL_DISABLED')" value="0" />
           <el-option :label="$t('ALL_ENABLED')" value="1" />
           <el-option :label="$t('ARTICLE_DISAVLED')" value="2" />
@@ -38,67 +37,78 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" icon="el-icon-search"     @click="handleQuery">{{
+        <el-button type="primary" icon="el-icon-search" @click="handleQuery">{{
           $t("Search") }}</el-button>
-        <el-button icon="el-icon-refresh"  @click="resetQuery">{{
+        <el-button icon="el-icon-refresh" @click="resetQuery">{{
           $t("Clear")
         }}</el-button>
       </el-form-item>
     </el-form>
 
-    <div  >
+    <div>
       <el-row :gutter="10" class="mb8">
         <el-col :span="1.5">
-          <el-button type="primary" plain icon="el-icon-plus"  @click="handleAdd">{{ $t("Add") }}
+          <el-button type="primary" plain icon="el-icon-plus" @click="handleAdd">{{ $t("Add") }}
           </el-button>
         </el-col>
         <el-col :span="1.5">
-          <el-button type="warning" plain icon="iconfont icon-daochu"  @click="handleExport">{{ $t("Export")
+          <el-button type="warning" plain icon="iconfont icon-daochu" @click="handleExport">{{ $t("Export")
           }}</el-button>
         </el-col>
         <el-col :span="1.5">
-          <el-button type="primary" plain  icon="el-icon-s-promotion" @click="handleEmail">{{ $t("SEND_MAIL") }}</el-button>
+          <el-button type="primary" plain icon="el-icon-s-promotion" @click="handleEmail">{{ $t("SEND_MAIL")
+          }}</el-button>
         </el-col>
       </el-row>
 
-      <el-table v-loading="loading"   :default-sort = "{prop: 'date', order: 'descending'}" :data="userList" @selection-change="handleSelectionChange"
-        :row-class-name="tableRowClassName" :header-cell-style="{ 'background-color': '#EDF4FC' }">
+      <el-table v-loading="loading" :default-sort="{ prop: 'date', order: 'descending' }" :data="userList"
+        @selection-change="handleSelectionChange" :row-class-name="tableRowClassName"
+        :header-cell-style="{ 'background-color': '#EDF4FC' }">
         <el-table-column type="selection" width="50" align="center" />
-        <el-table-column :label="$t('SER_NUM')" width="50" align="center"  prop="userId" />
+        <el-table-column :label="$t('SER_NUM')" width="110" align="center" prop="userId" />
         <el-table-column :label="$t('UserID')" width="100" align="center" show-overflow-tooltip="true" prop="userName"
           :show-overflow-tooltip="true" />
-        <el-table-column :label="$t('Nickname')" width="100" align="center"  show-overflow-tooltip="true" prop="nickName"
+        <el-table-column :label="$t('Nickname')" width="100" align="center" show-overflow-tooltip="true" prop="nickName"
           :show-overflow-tooltip="true" />
 
-        <el-table-column :label="$t('Email')" width="100" align="center"  show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('Email')" width="100" align="center" show-overflow-tooltip="true"
+          prop="phonenumber" />
 
-        <el-table-column :label="$t('Gender')" width="100" align="center" >
+        <el-table-column :label="$t('Gender')" width="100" align="center">
           <template slot-scope="scope">
             {{ scope.row.status == "0" ? $t("male") : $t("female") }}
           </template>
         </el-table-column>
-        <el-table-column :label="$t('Country')" align="center" width="100"  show-overflow-tooltip="true" prop="dept.deptName" />
-        <el-table-column :label="$t('Birthday')" align="center" width="100"  show-overflow-tooltip="true" prop="dept.deptName" />
+        <el-table-column :label="$t('Country')" align="center" width="100" show-overflow-tooltip="true"
+          prop="dept.deptName" />
+        <el-table-column :label="$t('Birthday')" align="center" width="100" show-overflow-tooltip="true"
+          prop="dept.deptName" />
         <el-table-column :label="$t('Age')" align="center" width="100" prop="dept.deptName" />
-        <el-table-column :label="$t('IDENTIFY')" align="center" width="100"  show-overflow-tooltip="true" prop="dept.deptName" />
-        <el-table-column :label="$t('Ink')" sortable align="center" width="100"  show-overflow-tooltip="true" prop="dept.deptName" />
-        <el-table-column :label="$t('REVENUE_INK')" sortable align="center" width="100"  show-overflow-tooltip="true" prop="dept.deptName" />
-        <el-table-column :label="$t('COMPLETION_RATE')" sortable align="center" width="100"  show-overflow-tooltip="true" prop="dept.deptName" />
-        <el-table-column :label="$t('LOGON_MODE')" align="center" width="100"  show-overflow-tooltip="true" prop="dept.deptName" />
-        <el-table-column :label="$t('DATE_OF_CERTIFICATION')"  sortable align="center" width="100"  show-overflow-tooltip="true" prop="dept.deptName" />
-        <el-table-column :label="$t('REGISTRATIOB_DATE')" sortable align="center" width="100"  show-overflow-tooltip="true" prop="dept.deptName" />
+        <el-table-column :label="$t('IDENTIFY')" align="center" width="100" show-overflow-tooltip="true"
+          prop="dept.deptName" />
+        <el-table-column :label="$t('Ink')" sortable align="center" width="100" show-overflow-tooltip="true"
+          prop="dept.deptName" />
+        <el-table-column :label="$t('REVENUE_INK')" sortable align="center" width="120" show-overflow-tooltip="true"
+          prop="dept.deptName" />
+        <el-table-column :label="$t('COMPLETION_RATE')" sortable align="center" width="190" show-overflow-tooltip="true"
+          prop="dept.deptName" />
+        <el-table-column :label="$t('LOGON_MODE')" align="center" width="160" show-overflow-tooltip="true"
+          prop="dept.deptName" />
+        <el-table-column :label="$t('DATE_OF_CERTIFICATION')" sortable align="center" width="160"
+          show-overflow-tooltip="true" prop="dept.deptName" />
+        <el-table-column :label="$t('REGISTRATIOB_DATE')" sortable align="center" width="180" show-overflow-tooltip="true"
+          prop="dept.deptName" />
         <el-table-column :label="$t('Status')" align="center" key="status">
           <template slot-scope="scope">
             {{ scope.row.status == "0" ? $t("ENABLE") : $t("DISABLE") }}
           </template>
         </el-table-column>
-        <el-table-column :label="$t('Operate')" align="center" fixed="right" class-name="small-padding fixed-width">
-          <template slot-scope="scope" >
-            <el-button  type="text"
-              @click="handleDetail(scope.row)">{{ $t("USER_DETAILS") }}
+        <el-table-column :label="$t('Operate')" width="150" align="center" fixed="right"
+          class-name="small-padding fixed-width">
+          <template slot-scope="scope">
+            <el-button type="text" @click="handleDetail(scope.row)">{{ $t("USER_DETAILS") }}
             </el-button>
-            <el-button  type="text"
-              @click="handlemanage(scope.row)">{{ $t("USER_MANAGEMENT") }}</el-button>
+            <el-button type="text" @click="handlemanage(scope.row)">{{ $t("USER_MANAGEMENT") }}</el-button>
 
           </template>
         </el-table-column>
@@ -115,13 +125,12 @@
         <el-form class="mt25" label-position="right" ref="form" :model="form" :rules="rules" label-width="120px">
 
           <el-form-item v-if="form.userId == undefined" :label="$t('Email')" prop="userName">
-              <el-input v-model="form.userName" :placeholder="$t('Email')" maxlength="30" />
-            </el-form-item>
-            <el-form-item v-if="form.userId == undefined" :label="$t('Password')" prop="password">
-              <el-input v-model="form.password" :placeholder="$t('Enter')" type="password" maxlength="20"
-                show-password />
-            </el-form-item>
-      </el-form>
+            <el-input v-model="form.userName" :placeholder="$t('Email')" maxlength="30" />
+          </el-form-item>
+          <el-form-item v-if="form.userId == undefined" :label="$t('Password')" prop="password">
+            <el-input v-model="form.password" :placeholder="$t('Enter')" type="password" maxlength="20" show-password />
+          </el-form-item>
+        </el-form>
       </div>
       <div slot="footer" class="dialog-footer">
 
@@ -153,7 +162,7 @@ import ManageDialg from "./manage-dialog.vue"
 export default {
   name: "User",
   dicts: ["sys_normal_disable", "sys_user_sex"],
-  components: { Treeselect ,ManageDialg},
+  components: { Treeselect, ManageDialg },
   data() {
     return {
       // 遮罩层
@@ -202,72 +211,28 @@ export default {
 
       // 表单校验
       rules: {
-        status: [
-          {
-            required: true,
-            message: this.$t("PLEASE_SELECT_WHETHER"),
-            trigger: "blur",
-          },
-        ],
-        userName: [
-          {
-            required: true,
-            message: this.$t("ACCOUNT_CANNOT"),
-            trigger: "blur",
-          },
-          {
-            min: 5,
-            max: 20,
-            message: this.$t("ACCOUNT_LENGTH"),
-            trigger: "blur",
-          },
-        ],
-        deptId: [
-          {
-            required: true,
-            message: this.$t("PLEASE_SELECT_ROLE"),
-            trigger: "blur",
-          },
-        ],
-        nickName: [
-          {
-            required: true,
-            message: this.$t("USER_NAME_CANNOT"),
-            trigger: "blur",
-          },
-        ],
+
         password: [
           {
             required: true,
-            message: this.$t("PASSWORD_CANNOT"),
+            message: this.$t("BNWK"),
             trigger: "blur",
           },
           {
             min: 5,
             max: 20,
-            message: this.$t("PASSWORD_LENGTH"),
+            message: this.$t("MUST_BE_5_20"),
             trigger: "blur",
           },
         ],
         email: [
           {
             type: "email",
-            message: this.$t("PLEASE_INPUT_EMAIL_ADDRESS"),
+            message: this.$t("BNWK"),
             trigger: ["blur", "change"],
           },
         ],
-        phonenumber: [
-          {
-            required: true,
-            message: this.$t("PHONE_NUMBER_CANNOT"),
-            trigger: "blur",
-          },
-          {
-            pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
-            message: this.$t("PLEASE_INPUT_CORRECT_PHONE"),
-            trigger: "blur",
-          },
-        ],
+
       },
     };
   },
@@ -406,12 +371,12 @@ export default {
       });
     },
     // 发送邮件
-    handleEmail(){
-      if(this.ids.length<=0){
+    handleEmail() {
+      if (this.ids.length <= 0) {
         this.$modal.msgError(this.$t("PLEASE_CHECK"));
         return false
       }
-      this.$router.push({path:'/user/send',params:{}})
+      this.$router.push({ path: '/user/send', params: {} })
       this.$modal.msgSuccess(this.$t("OPERTATE_SUCCESS"));
 
     },
@@ -511,10 +476,10 @@ export default {
       });
     },
     // 用户详情
-    handleDetail(){
-      this.$router.push({path:'/user/checkuser',query:{id:1}})
+    handleDetail() {
+      this.$router.push({ path: '/user/checkuser', query: { id: 1 } })
     },
-    handlemanage(){
+    handlemanage() {
       this.$refs.manage.open()
     }
   },

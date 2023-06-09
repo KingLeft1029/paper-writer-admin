@@ -88,7 +88,7 @@
           <span>0230407000000</span>
           <span class="handle-word ml20" @click="toMore('/content/audit')">{{ $t('More') }}</span>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="18">
           <span>{{ $t('ARTICLE_UNDER_REVIEW') }}：</span>
           <span>0230407000000</span>
           <span class="handle-word ml20" @click="toMore('/content/book')">{{ $t('More') }}</span>
@@ -108,7 +108,7 @@
           <span>0230407000000</span>
           <span class="handle-word ml20" @click="toMore('/user/apply')">{{ $t('More') }}</span>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="12">
           <span>{{ $t('Inkjet') }}：</span>
           <span>0230407000000</span>
           <span class="handle-word ml20" @click="toMore('/user/give')">{{ $t('More') }}</span>

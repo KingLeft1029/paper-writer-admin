@@ -111,6 +111,7 @@
 </template>
 
 <script>
+import store from "@/store";
 import { getCodeImg } from "@/api/login";
 import Cookies from "js-cookie";
 import { encrypt, decrypt } from "@/utils/jsencrypt";
@@ -170,11 +171,13 @@ export default {
   created() {
     this.getCode();
     this.getCookie();
+    document.title=this.$t('MZZJ_TITLE')
   },
   methods: {
     radioChange(val) {
 
       Cookies.set("language", val);
+      store.commit('SET_LANG', val);
       this.$i18n.locale = val;
       document.title=this.$t('MZZJ_TITLE')
     },

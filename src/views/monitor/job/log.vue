@@ -214,9 +214,9 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        jobName: undefined,
-        jobGroup: undefined,
-        status: undefined
+        name: undefined,
+        createBy: undefined,
+        isTop: undefined
       }
     };
   },

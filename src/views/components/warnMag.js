@@ -1,12 +1,12 @@
 
-export let warnMag = function (data, title) {
+export let warnMag = function (data, title,dataSpan) {
   let h = this.$createElement
   return this.$msgbox({
-    title: title ? title : this.$t('HINT'),
+    title: title&&title!='' ? title : this.$t('HINT'),
     message: h(
       "div",
       {
-        style: "padding: 35px 30px 49px 30px;",
+        style: "padding: 35px 8px 49px 8px;",
         class: "messageBox",
       },
       [
@@ -22,7 +22,7 @@ export let warnMag = function (data, title) {
         h(
           "div",
           { style: "color: #999;font-size:14px;marginTop:8px;margin-left:35px" },
-          data
+          dataSpan
         ),
       ],
 

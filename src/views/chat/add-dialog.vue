@@ -1,33 +1,32 @@
 <!--  -->
 <template>
-  <el-dialog :title="title" :visible.sync="show" width="720px" append-to-body>
+  <el-dialog :title="title" :visible.sync="show" width="750px" append-to-body>
     <div class="dialog-box">
-      <el-form label-position="right" ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item :label="$t('QUN_M')" prop="userName" style="position:relative">
+      <el-form label-position="right" ref="form" :model="form" :rules="rules" label-width="150px">
+        <el-form-item :label="$t('QUN_M')+'：'" prop="userName" style="position:relative">
           <el-input v-model="form.rate" :placeholder="$t('Enter')" clearable
            />
         </el-form-item>
-        <el-form-item :label="$t('QUN_M')" prop="userName" style="position:relative">
+        <el-form-item :label="$t('QUN_Z')+'：'" prop="userName" style="position:relative">
         	<el-select clearable v-model="checkboxList"  style="width:100%">
 					<el-option v-for="item in 31" :key="item" :value="item">{{item}}</el-option>
 				</el-select>
         </el-form-item>
-        <el-form-item :label="$t('QUN_ZI')" prop="userName" style="position:relative">
+        <el-form-item :label="$t('QUN_ZI')+'：'" prop="userName" style="position:relative">
           <el-input v-model="form.rate" :placeholder="$t('Enter')" disabled clearable
            />
         </el-form-item>
-        <el-form-item :label="$t('Administrator')" prop="userName" style="position:relative">
+        <el-form-item :label="$t('Administrator')+'：'" prop="userName" style="position:relative">
         	<el-select clearable v-model="checkboxList"  style="width:100%">
 					<el-option v-for="item in 31" :key="item" :value="item">{{item}}</el-option>
 				</el-select>
         </el-form-item>
-        <el-form-item :label="$t('AdministratorID')" prop="userName" style="position:relative">
+        <el-form-item :label="$t('AdministratorID')+'：'" prop="userName" style="position:relative">
           <el-input v-model="form.rate" :placeholder="$t('Enter')" disabled clearable
            />
         </el-form-item>
-        <el-form-item :label="$t('GROUP_AVATAR')" prop="userName" style="position:relative">
-          <el-input v-model="form.rate" :placeholder="$t('Enter')" disabled clearable
-           />
+        <el-form-item :label="$t('GROUP_AVATAR')+'：'" prop="userName" style="position:relative">
+          <ImageUpload></ImageUpload>
         </el-form-item>
       </el-form>
     </div>
@@ -56,7 +55,7 @@ export default {
         userName: [
           {
             required: true,
-            message: this.$t("PLEASE_SELECT_WHETHER"),
+            message: this.$t("BNWK"),
             trigger: "change",
           },
         ],
@@ -69,9 +68,9 @@ export default {
   methods: {
     open(num) {
       if (num == 1) {
-        this.title = '配置文章佣金比例'
+        this.title = this.$t('Add')
       } else {
-        this.title = '配置课程佣金比例'
+        this.title = this.$t('View')
       }
       this.show = true
     },

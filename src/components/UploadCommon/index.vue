@@ -535,7 +535,7 @@ export default {
       console.log(err);
       this.$message({
         type: "warning",
-        message: err.message || "网络异常，请稍后再试",
+        message: err.message || this.$t('WLYC'),
         duration: 4000,
       });
       for (let i = 0; i < this.fileList.length; i++) {
@@ -572,7 +572,7 @@ export default {
         if (this.responseNum == fileList.length) {
           this.$message({
             type: "success",
-            message: "上传成功",
+            message:this.$t('SCCG'),
             duration: 4000,
           });
         }
@@ -609,14 +609,14 @@ export default {
       if (this.listType !== "text" && !isIMAGE) {
         this.$message({
           type: "warning",
-          message: "上传文件只能是图片(" + imgAccept + ")格式!",
+          message: `${this.$t('SCWJDGS')}:${imgAccept}` ,
           duration: 2000,
         });
         return false;
       } else if (this.listType === "text" && !checked) {
         this.$message({
           type: "warning",
-          message: "上传文件只能是(" + attachAccept + ")格式!",
+          message: `${this.$t('SCWJDGS')}:${imgAccept}` ,
           duration: 2000,
         });
         return false;
@@ -624,7 +624,8 @@ export default {
       if (!isLimit) {
         this.$message({
           type: "warning",
-          message: "上传文件大小不能超过 " + this.maxSize + "MB!",
+          message: `${this.$t('SCWJDX')}:${this.maxSize}"MB!` ,
+          // message: "上传文件大小不能超过 " + this.maxSize + "MB!",
           duration: 2000,
         });
       }

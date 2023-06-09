@@ -38,32 +38,43 @@
       <el-table v-loading="loading"   :default-sort = "{prop: 'date', order: 'descending'}" :data="userList" @selection-change="handleSelectionChange"
         :row-class-name="tableRowClassName" :header-cell-style="{ 'background-color': '#EDF4FC' }">
 
-        <el-table-column :label="$t('SER_NUM')" align="center" key="userId" prop="userId" />
-        <el-table-column :label="$t('UserID')"  align="center" key="userName" prop="userName"
+        <el-table-column :label="$t('SER_NUM')" align="center" width="110" prop="userId" />
+        <el-table-column :label="$t('UserID')"  align="center" width='130' show-overflow-tooltip="true" prop="userName"
           :show-overflow-tooltip="true" />
-        <el-table-column :label="$t('Nickname')" align="center" key="nickName" prop="nickName"
+        <el-table-column :label="$t('Nickname')" align="center" width='130' show-overflow-tooltip="true" prop="nickName"
           :show-overflow-tooltip="true" />
-        <el-table-column :label="$t('Email')" align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Gender')" align="center" key="phonenumber" prop="phonenumber" />
+        <el-table-column :label="$t('Email')" align="center" width='130' show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('Gender')" align="center"  show-overflow-tooltip="true" prop="phonenumber" />
 
 
-        <el-table-column :label="$t('Birthday')"  align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Age')"  align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Status')"  align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Reporter')"  align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('JBYY')"  align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('JBSJ')" sortable align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Operate')" align="center" fixed="right" class-name="small-padding fixed-width">
+        <el-table-column :label="$t('Birthday')"  align="center"  show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('Age')"  align="center"  show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('Status')"  align="center"  show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('Reporter')"  align="center" width='130' show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('JBYY')"  align="center" width='210' show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('JBSJ')" sortable align="center" width='210' show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('Operate')" align="center" fixed="right" width='150'  class-name="small-padding fixed-width">
           <template slot-scope="scope" v-if="scope.row.userId !== 1">
-            <el-button  type="text"
+            <div>
+              <el-button  type="text"
               @click="handleCheck(scope.row)">{{ $t("CKYH") }}
             </el-button>
-            <el-button  type="text"
+            </div>
+            <div>
+              <el-button  type="text"
               @click="handleChat(1,scope.row)">{{ $t("Muted") }}
             </el-button>
-            <el-button  type="text" i
-              @click="handleChat(2,scope.row)">{{ $t("Delete") }}
+            </div>
+            <div>
+              <el-button  type="text"
+              @click="handleChat(2,scope.row)">{{ $t("Unmuted") }}
             </el-button>
+            </div>
+          <div>
+            <el-button  type="text" i
+              @click="handleChat(3,scope.row)">{{ $t("Delete") }}
+            </el-button>
+          </div>
           </template>
         </el-table-column>
       </el-table>
@@ -318,44 +329,29 @@ export default {
     handleChat(num){
   if(num==1){
     const h = this.$createElement;
-      this.$confirm("", "操作确认", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-        customClass:'ele-box',
-        message: h('div', null, [
-          h('div', { style: 'fontSize: 18px' }, '是否确定解除该用户禁言？ '),
-          h('div', { style: 'color: #999' }, '解除禁言后该用户可在群内发送消息')
-        ]),
-      })
-        .then(function () {
-          return delDeliveryCompanyManage(companyIds);
-        })
+    // 解除禁言
+    this.$warnMag(`${this.$t("SFQDYHJY")}？`,'',this.$t('JCJYHYH'))
         .then(() => {
           this.getList();
-          this.$modal.msgSuccess("操作成功");
+          this.$modal.msgSuccess(this.$t("OPERTATE_SUCCESS"));
         })
-        .catch(() => { });
+        .catch(() => {});
+  }else if(num==2){
+    // 禁言
+    this.$warnMag(`${this.$t("JYYH")}？`,'',this.$t('JYHYH'))
+        .then(() => {
+          this.getList();
+          this.$modal.msgSuccess(this.$t("OPERTATE_SUCCESS"));
+        })
+        .catch(() => {});
   }else{
-    const h = this.$createElement;
-      this.$confirm("", "操作确认", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-        customClass:'ele-box',
-        message: h('div', null, [
-          h('div', { style: 'fontSize: 18px' }, '是否确定删除数据？'),
-          h('div', { style: 'color: #999' }, '是否确定删除数据？')
-        ]),
-      })
-        .then(function () {
-          return delDeliveryCompanyManage(companyIds);
-        })
+     // 删除
+     this.$warnMag(`${this.$t("QRSCM")}？`,this.$t('Warning'),`${this.$t("QRSCM")}？`)
         .then(() => {
           this.getList();
-          this.$modal.msgSuccess("操作成功");
+          this.$modal.msgSuccess(this.$t("SCCCL"));
         })
-        .catch(() => { });
+        .catch(() => {});
   }
     },
 

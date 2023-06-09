@@ -33,26 +33,32 @@
         @selection-change="handleSelectionChange" :row-class-name="tableRowClassName"
         :header-cell-style="{ 'background-color': '#EDF4FC' }">
 
-        <el-table-column :label="$t('SER_NUM')" align="center" key="userId" prop="userId" />
-        <el-table-column :label="$t('QUN_ID')" align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('QUN_K')" align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('QUN_R')" align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('QUN_Z')" align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Status')" align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Reporter')" align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('JBYY')" align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('JBSJ')" sortable align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Operate')" align="center" fixed="right" class-name="small-padding fixed-width">
+        <el-table-column :label="$t('SER_NUM')" align="center" width="110" prop="userId" />
+        <el-table-column :label="$t('QUN_ID')" align="center" width='130' show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('QUN_K')" align="center" width='220' show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('QUN_R')" align="center" width='220' show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('QUN_Z')" align="center"  show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('Status')" align="center"  show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('Reporter')" align="center"  show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('JBYY')" align="center" width='220' show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('JBSJ')" sortable align="center" width='130' show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('Operate')" align="center" fixed="right" width="150" class-name="small-padding fixed-width">
           <template slot-scope="scope">
-            <el-button  type="text" icon="el-icon-edit"
+          <div>
+            <el-button  type="text"
               @click="handleCheck(scope.row)">{{ $t("CKXQ") }}
             </el-button>
-            <el-button  type="text" icon="el-icon-edit"
+          </div>
+           <div>
+            <el-button  type="text"
               @click="handleChat(1,scope.row)">{{ $t("JYQL") }}
             </el-button>
-            <el-button  type="text" icon="el-icon-edit"
+           </div>
+           <div>
+            <el-button  type="text"
               @click="handleChat(2,scope.row)">{{ $t("JSQL") }}
             </el-button>
+           </div>
           </template>
         </el-table-column>
       </el-table>
@@ -293,45 +299,19 @@ export default {
     },
     handleChat(num){
   if(num==1){
-    const h = this.$createElement;
-      this.$confirm("是否确定禁言群聊？", "操作确认", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-        customClass:'ele-box',
-        message: h('div', null, [
-          h('div', { style: 'fontSize: 18px' }, '是否确定禁言群聊？ '),
-          h('div', { style: 'color: #999' }, '禁言后任何人不可在群内发送消息')
-        ]),
-      })
-        .then(function () {
-          return delDeliveryCompanyManage(companyIds);
-        })
+        this.$warnMag(`${this.$t("SFQDJ")}？`)
         .then(() => {
           this.getList();
-          this.$modal.msgSuccess("操作成功");
+          this.$modal.msgSuccess(this.$t("OPERTATE_SUCCESS"));
         })
-        .catch(() => { });
+        .catch(() => {});
   }else{
-    const h = this.$createElement;
-      this.$confirm("", "操作确认", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-        customClass:'ele-box',
-        message: h('div', null, [
-          h('div', { style: 'fontSize: 18px' }, '是否确定解散群聊？'),
-          h('div', { style: 'color: #999' }, '解散后不可恢复，群聊信息保留，任何人不可在群内发送消息等操作。')
-        ]),
-      })
-        .then(function () {
-          return delDeliveryCompanyManage(companyIds);
-        })
+    this.$warnMag(`${this.$t("SFQDJS")}？`)
         .then(() => {
           this.getList();
-          this.$modal.msgSuccess("操作成功");
+          this.$modal.msgSuccess(this.$t("OPERTATE_SUCCESS"));
         })
-        .catch(() => { });
+        .catch(() => {});
   }
     },
 

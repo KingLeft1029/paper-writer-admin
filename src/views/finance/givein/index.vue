@@ -35,7 +35,7 @@
     <div >
       <el-row :gutter="10" class="mb8" >
         <el-col :span="1.5"  class="mt5">
-          {{ $t('Total') }}5{{ $t('data') }}
+          {{ $t('Total') }} 5 {{ $t('data') }}
         </el-col>
         <el-col :span="1.5">
           <el-button type="warning" plain icon="iconfont icon-daochu"  @click="handleExport">{{ $t("Export")
@@ -47,16 +47,16 @@
       <el-table v-loading="loading"   :default-sort = "{prop: 'date', order: 'descending'}" :data="userList" @selection-change="handleSelectionChange"
         :row-class-name="tableRowClassName" :header-cell-style="{ 'background-color': '#EDF4FC' }">
 
-        <el-table-column :label="$t('SER_NUM')" align="center" key="userId" prop="userId" />
-        <el-table-column :label="$t('Inkjet')" sortable align="center" key="userName" prop="userName"
+        <el-table-column :label="$t('SER_NUM')" align="center" width="110" prop="userId" />
+        <el-table-column :label="$t('Inkjet')" sortable align="center" show-overflow-tooltip="true" prop="userName"
           :show-overflow-tooltip="true" />
-        <el-table-column :label="$t('Title')" align="center" key="nickName" prop="nickName"
+        <el-table-column :label="$t('Title')" align="center" show-overflow-tooltip="true" prop="nickName"
           :show-overflow-tooltip="true" />
-        <el-table-column :label="$t('Tags')" align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Author')" align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Hot')" align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Newest')" sortable align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Operate')" align="center" fixed="right" class-name="small-padding fixed-width">
+        <el-table-column :label="$t('Tags')" align="center"  show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('Author')" align="center" show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('Hot')" align="center"  show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('Newest')" sortable align="center" show-overflow-tooltip="true" prop="phonenumber" />
+        <el-table-column :label="$t('Operate')" align="center" fixed="right"  width='150' class-name="small-padding fixed-width">
           <template slot-scope="scope" v-if="scope.row.userId !== 1">
             <el-button  type="text" icon="el-icon-view"
               @click="handleCheck(scope.row)">{{ $t("VIEW_D") }}
