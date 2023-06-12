@@ -146,14 +146,14 @@
 
 <script>
 import {
-  listUser,
+  listApi,
   getUser,
-  delUser,
-  addUser,
-  updateUser,
+  delApi,
+  addApi,
+  editApi,
   resetUserPwd,
   changeUserStatus,
-} from "@/api/system/user";
+} from "@/api/user";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 import { listRole } from "@/api/system/role";
@@ -265,7 +265,7 @@ export default {
     /** 查询用户列表 */
     getList() {
       this.loading = true;
-      listUser(this.addDateRange(this.queryParams, this.dateRange)).then(
+      listApi(this.addDateRange(this.queryParams, this.dateRange)).then(
         (response) => {
           this.userList = response.rows;
           this.total = response.total;
@@ -405,13 +405,13 @@ export default {
       this.$refs["form"].validate((valid) => {
         if (valid) {
           if (this.form.userId != undefined) {
-            updateUser(this.form).then((response) => {
+            editApi(this.form).then((response) => {
               this.$modal.msgSuccess(this.$t("UPDATED_SUCCESS"));
               this.open = false;
               this.getList();
             });
           } else {
-            addUser(this.form).then((response) => {
+            addApi(this.form).then((response) => {
               this.$modal.msgSuccess(this.$t("ADD_SUCCESS"));
               this.open = false;
               this.getList();
@@ -426,7 +426,7 @@ export default {
       this.$modal
         .confirm('是否确认删除用户编号为"' + userIds + '"的数据项？')
         .then(function () {
-          return delUser(userIds);
+          return delApi(userIds);
         })
         .then(() => {
           this.getList();

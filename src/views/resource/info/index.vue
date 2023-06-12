@@ -8,7 +8,8 @@
 
 
         <el-table-column :label="$t('ID')" align="center" prop="id" :show-overflow-tooltip="true" />
-        <el-table-column :label="$t('PTXX')" align="center" prop="name" :show-overflow-tooltip="true" :formatter="formatterS" />
+        <el-table-column :label="$t('PTXX')" align="center" prop="name" :show-overflow-tooltip="true"
+          :formatter="formatterS" />
 
         <el-table-column :label="$t('Operators')" align="center" prop="createName" />
         <el-table-column :label="$t('CREATION_TIME')" align="center" width="140" :show-overflow-tooltip="true"
@@ -47,7 +48,7 @@
         <el-row>
           <el-col :span="24">
             <el-form-item :label="$t('Content') + ':'" prop="content">
-              <editor :html="form.content" v-if="form.id"></editor>
+              <editor :html="form.content" v-if="editFlag"></editor>
               <div v-html="form.content" v-else>
               </div>
             </el-form-item>
@@ -112,6 +113,7 @@ export default {
           { required: true, message: this.$t('BNWK'), trigger: "blur" },
         ],
       },
+      editFlag:false
 
     };
   },
@@ -125,11 +127,11 @@ export default {
   methods: {
 
     formatterS(row) {
-       if(this.language == 'en' ){
+      if (this.language == 'en') {
         return row.keyWord
-       }else{
+      } else {
         row.name
-       }
+      }
 
 
     },
@@ -158,7 +160,6 @@ export default {
       this.form = {
         content: undefined,
 
-
       };
       this.resetForm("form");
     },
@@ -167,7 +168,9 @@ export default {
       this.reset();
       const id = row.id
       detailApi(id).then((response) => {
+        this.editFlag=false
         this.form = response.data;
+
         this.open = true;
         this.title = this.$t("View");
 
@@ -178,7 +181,9 @@ export default {
     handleUpdate(row) {
       this.reset();
       const id = row.id
+
       detailApi(id).then((response) => {
+        this.editFlag=true
         this.form = response.data;
         this.open = true;
         this.title = this.$t("Edit");
