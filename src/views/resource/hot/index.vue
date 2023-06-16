@@ -8,7 +8,7 @@
           @keyup.enter.native="handleQuery" />
       </el-form-item>
       <el-form-item prop="status">
-        <el-date-picker v-model="queryParams.dateRange" type="daterange" range-separator="-"
+        <el-date-picker v-model="dateRange" type="daterange" range-separator="-"
           :start-placeholder="$t('START_DATE')" :end-placeholder="$t('END_DATE')">
         </el-date-picker>
       </el-form-item>

@@ -45,23 +45,25 @@
         :header-cell-style="{ 'background-color': '#EDF4FC' }">
 
         <el-table-column :label="$t('ID')" align="center" key="id" prop="id" />
-        <el-table-column :label="$t('SEN_WORD')" align="center" key="userName" prop="userName"
+        <el-table-column :label="$t('SEN_WORD')" align="center"  prop="word"
           :show-overflow-tooltip="true" />
-        <el-table-column :label="$t('CREATION_TIME')" sortable align="center" key="nickName" prop="nickName"
-          :show-overflow-tooltip="true" />
-
-        <el-table-column :label="$t('Operators')" align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Status')" align="center" key="status">
+          <el-table-column :label="$t('CREATION_TIME')" align="center"  width="140"  :show-overflow-tooltip="true" prop="createTime">
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.createTime) }}</span>
+        </template>
+      </el-table-column>
+        <el-table-column :label="$t('Operators')" align="center"  prop="CREATOR" />
+        <el-table-column :label="$t('Status')" align="center">
           <template slot-scope="scope">
-            {{ scope.row.status == "0" ? $t("ENABLE") : $t("DISABLE") }}
+            {{ scope.row.status == "0" ? $t("Disabled") : $t("Enabled") }}
           </template>
         </el-table-column>
         <el-table-column :label="$t('Operate')" align="center" fixed="right" class-name="small-padding fixed-width">
-          <template slot-scope="scope" v-if="scope.row.id !== 1">
+          <template slot-scope="scope">
             <el-button type="text" @click="handleUpdate(scope.row)">{{ $t("Edit") }}
             </el-button>
-            <el-button type="text" @click="handleDelete(scope.row)">{{ $t("ENA") }}</el-button>
-            <el-button type="text" style="color: #fe3838" @click="handleDelete(scope.row)">{{ $t("Dis") }}</el-button>
+            <el-button type="text" @click="handleDelete(scope.row)"  v-if="scope.row.status==0">{{ $t("ENA") }}</el-button>
+            <el-button type="text" style="color: #fe3838" @click="handleDelete(scope.row)" v-else>{{ $t("Dis") }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -74,7 +76,7 @@
     <el-dialog :title="title" :visible.sync="open" width="900px" append-to-body>
       <div class="dialog-box">
         <el-form label-position="right" ref="form" :model="form" :rules="rules" label-width="130px">
-          <el-form-item :label="$t('SEN_WORD')+'：'" prop="word">
+          <el-form-item :label="$t('SEN_WORD') + '：'" prop="word">
             <el-input v-model="form.word" :placeholder="$t('shit')" type="textarea" :rows="10" maxlength="200"
               show-word-limit />
           </el-form-item>
@@ -97,6 +99,7 @@ import {
   listApi,
   addApi,
   editApi,
+  detailApi
 } from "@/api/sensitive";
 
 
@@ -168,27 +171,9 @@ export default {
       this.loading = true;
       listApi(this.addDateRange(this.queryParams, this.dateRange)).then(
         (response) => {
-          this.list = response.rows;
-          this.total = response.total;
-          // let roleArr = this.list.filter(item => {
-          //   if (item.dept !== null) {
-          //     return item
-          //   }
-          // })
+          this.list = response.data.records;
+          this.total = response.data.total;
 
-          // const newArr = roleArr.reduce(function (tempArr, item) {
-          //   if (tempArr.findIndex((ele) => ele.deptId === item.deptId) === -1) {
-          //     tempArr.push(item)
-          //   }
-          //   return tempArr
-
-          // }, []).map(item => {
-          //   return {
-
-          //     ...item
-          //   }
-          // })
-          // this.roleOptions = newArr
           this.loading = false;
         }
       );
@@ -203,18 +188,7 @@ export default {
     // 表单重置
     reset() {
       this.form = {
-        id: undefined,
-        deptId: undefined,
-        userName: undefined,
-        nickName: undefined,
-        password: undefined,
-        phonenumber: undefined,
-        email: undefined,
-        sex: undefined,
-        status: undefined,
-        remark: undefined,
-        postIds: [],
-        roleId: undefined,
+      word:''
       };
       this.resetForm("form");
     },
@@ -229,12 +203,7 @@ export default {
       this.resetForm("queryForm");
       this.handleQuery();
     },
-    // 多选框选中数据
-    handleSelectionChange(selection) {
-      this.ids = selection.map((item) => item.id);
-      this.single = selection.length != 1;
-      this.multiple = !selection.length;
-    },
+
     /** 新增按钮操作 */
     handleAdd() {
 
@@ -250,7 +219,7 @@ export default {
     handleUpdate(row) {
       this.reset();
       const id = row.id;
-      iddetailApi(id).then((response) => {
+      detailApi(id).then((response) => {
         this.form = response.data;
         this.open = true;
         this.title = this.$t("Edit");
@@ -260,19 +229,18 @@ export default {
 
     /** 提交按钮 */
     submitForm: function () {
-      console.log(this.form.word.split('\n'),"vvvvvvvv")
-      return
+
       this.$refs["form"].validate((valid) => {
         if (valid) {
           if (this.form.id != undefined) {
-            editApi(this.form).then((response) => {
-              this.$modal.msgSuccess(this.$t("UPDATED_SUCCESS"));
+            editApi({word:this.form.word,id:this.form.id}).then((response) => {
+              this.$modal.msgSuccess(this.$t("OPERTATE_SUCCESS"));
               this.open = false;
               this.getList();
             });
           } else {
-            addApi(this.form).then((response) => {
-              this.$modal.msgSuccess(this.$t("ADD_SUCCESS"));
+            addApi({ words: this.form.word.split('\n')}).then((response) => {
+              this.$modal.msgSuccess(this.$t("XZCG"));
               this.open = false;
               this.getList();
             });
@@ -309,32 +277,7 @@ export default {
     submitFileForm() {
       this.$refs.upload.submit();
     },
-    getRoleKyList() {
-      listRole().then((res) => {
-        let { code, rows } = res;
-        if (code === 200) {
-          let roleArr = rows.filter((item) => {
-            if (
-              (item.roleKey !== null && item.roleName !== null) ||
-              (item.roleKey !== undefined && item.roleName !== undefined)
-            ) {
-              return item;
-            }
-          });
-          let newArr = roleArr
-            .reduce(function (tempArr, item) {
-              if (
-                tempArr.findIndex((ele) => ele.roleKey === item.roleKey) === -1
-              ) {
-                tempArr.push(item);
-              }
-              return tempArr;
-            }, [])
-            .map((item) => item);
-          this.roleOptions = newArr;
-        }
-      });
-    },
+
   },
 };
 </script>

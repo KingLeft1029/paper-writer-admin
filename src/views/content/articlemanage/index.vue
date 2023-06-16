@@ -47,7 +47,11 @@
       <el-table v-loading="loading"   :default-sort = "{prop: 'date', order: 'descending'}" :data="userList" @selection-change="handleSelectionChange"
          :header-cell-style="{ 'background-color': '#EDF4FC' }">
 
-        <el-table-column :label="$t('SER_NUM')" align="center"  prop="userId" />
+        <el-table-column :label="$t('SER_NUM')" align="center">
+          <template slot-scope="scope">
+            <span>{{ (queryParams.pageNum - 1) * queryParams.pageSize + scope.$index + 1 }}</span>
+          </template>
+        </el-table-column>
         <el-table-column :label="$t('ARTICLE_ID')" align="center" show-overflow-tooltip="true" prop="userName"
           :show-overflow-tooltip="true" />
         <el-table-column :label="$t('Title')" align="center" show-overflow-tooltip="true" prop="nickName"

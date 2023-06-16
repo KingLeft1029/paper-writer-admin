@@ -13,16 +13,16 @@
         <span>{{ $t("LANGUAGE") }}：</span>
         <el-radio-group v-model="radio" @change="radioChange">
           <el-radio label="zh"
-            ><span style="color: #fff">简体中文</span></el-radio
+            ><span >简体中文</span></el-radio
           >
           <el-radio label="en"
-            ><span style="color: #fff">English</span></el-radio
+            ><span >English</span></el-radio
           >
         </el-radio-group>
       </div>
       <el-form-item prop="username">
         <div
-          style="border-left: 3px solid #1d76ee; border-radius: 5px 0px 0px 5px"
+
         >
           <el-input
             v-model="loginForm.username"
@@ -41,7 +41,7 @@
       </el-form-item>
       <el-form-item prop="password">
         <div
-          style="border-left: 3px solid #1d76ee; border-radius: 5px 0px 0px 5px"
+
         >
           <el-input
             v-model="loginForm.password"
@@ -60,7 +60,7 @@
       </el-form-item>
       <el-form-item prop="code" v-if="captchaOnOff">
         <div
-          style="border-left: 3px solid #1d76ee; border-radius: 5px 0px 0px 5px"
+
         >
           <el-input
             v-model="loginForm.code"
@@ -239,46 +239,50 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.el-checkbox__inner {
-  background-color: rgba(255, 255, 255, 0);
-}
+// .el-checkbox__inner {
+//   background-color: rgba(255, 255, 255, 0);
+// }
 .language {
-  color: #fff;
+  // color: #fff;
   font-size: 14px;
   margin-bottom: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.el-input__inner {
-  background-color: rgba(255, 255, 255, 0);
-  color: #fff;
-}
+// .el-input__inner {
+//   background-color: rgba(255, 255, 255, 0);
+//   color: #fff;
+// }
 .login {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   height: 100%;
-  background-image: url("../assets/images/index/bg.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+  background-image: url("../assets/images/login-background.jpg");
+  background-size: cover;
 }
 .title {
-  font-size: 24px;
-  letter-spacing: 2.8px;
-  line-height: 50px;
-  font-weight: 500;
-  margin-top: 50px;
+  margin: 0px auto 30px auto;
+  text-align: center;
+  color: #707070;
 }
-
 .login-form {
-  width: 474;
-  margin-right: 300px;
+  border-radius: 6px;
+  background: #ffffff;
+  width: 400px;
+  padding: 25px 25px 5px 25px;
   .login-title {
-    color: #fff;
+    // color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  .el-input {
+    height: 38px;
+    input {
+      height: 38px;
+    }
   }
   .input-icon {
     height: 39px;
@@ -296,7 +300,7 @@ export default {
   height: 38px;
   float: right;
   img {
-    border-radius: 5px;
+
     cursor: pointer;
     vertical-align: middle;
   }
