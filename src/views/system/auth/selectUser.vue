@@ -1,6 +1,6 @@
 <template>
   <!-- 授权用户 -->
-  <el-dialog title="选择用户" :visible.sync="visible" width="800px" top="5vh" append-to-body>
+  <el-dialog title="选择用户" :visible.sync="visible" width="800px" top="5vh" append-to-body :close-on-click-modal="false">
     <el-form :model="queryParams" ref="queryForm" :inline="true">
       <el-form-item :label="$t('YHXM')" prop="userName">
         <el-input v-model="queryParams.userName" :placeholder="$t('Enter')" clearable size="small"

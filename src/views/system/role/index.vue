@@ -94,7 +94,7 @@
       @pagination="getList" />
 
     <!-- 添加或修改角色配置对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body :close-on-click-modal="false">
       <el-form ref="form" :model="form" :rules="rules" label-width="100px">
         <el-form-item :label="$t('JSMC')" prop="roleName">
           <el-input v-model="form.roleName" :placeholder="$t('Enter')" />
@@ -139,7 +139,7 @@
     </el-dialog>
 
     <!-- 分配角色数据权限对话框 -->
-    <!-- <el-dialog :title="title" :visible.sync="openDataScope" width="500px" append-to-body>
+    <!-- <el-dialog :title="title" :visible.sync="openDataScope" width="500px" append-to-body :close-on-click-modal="false">
       <el-form :model="form" label-width="80px">
         <el-form-item :label="$t('JSMC')">
           <el-input v-model="form.roleName" :disabled="true" />

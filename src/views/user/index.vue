@@ -119,7 +119,7 @@
     </div>
 
     <!-- 添加或修改用户配置对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="700px" append-to-body :close-on-click-modal="false">
       <div class="dialog-box">
         <span class="red">{{ $t('NEWLY') }}</span>
         <el-form class="mt25" label-position="right" ref="form" :model="form" :rules="rules" label-width="120px">

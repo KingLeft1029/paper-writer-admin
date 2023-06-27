@@ -226,7 +226,7 @@
           : "手持证件照"
       }}
     </p>
-    <el-dialog :visible.sync="dialogVisible" :append-to-body="true">
+    <el-dialog :visible.sync="dialogVisible" append-to-body :close-on-click-modal="false">
       <img width="100%" :src="baseShowHref + dialogImageUrl" alt />
     </el-dialog>
   </div>

@@ -40,7 +40,8 @@
       :visible.sync="dialogVisible"
       title="预览"
       width="800"
-      append-to-body
+     append-to-body :close-on-click-modal="false"
+
     >
       <img
         :src="dialogImageUrl"

@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <el-dialog :title="title" :visible.sync="show" width="700px" append-to-body>
+  <el-dialog :title="title" :visible.sync="show" width="700px" append-to-body :close-on-click-modal="false">
     <div class="dialog-box">
       <el-form label-position="right" ref="form" :model="form" :rules="rules" label-width="130px">
         <el-form-item :label="$t('IDENTIFY')+'：'" prop="userName">

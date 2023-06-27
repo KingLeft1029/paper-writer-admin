@@ -42,7 +42,7 @@
       <el-table-column prop="image" align="center" width="140" :label="$t('ILL_PIC')">
         <template slot-scope="scope">
           <!-- {{ scope.row.image }} -->
-          <el-image style="width: 100px; height: 100px" :src="scope.row.image" :preview-src-list="scope.row.image">
+          <el-image style="width: 100px; height: 100px" :src="baseUrl+scope.row.image" :previewSrcList="[baseUrl+scope.row.image]">
           </el-image>
         </template>
       </el-table-column>
@@ -55,7 +55,7 @@
         :formatter="formatterS" />
       <el-table-column :label="$t('ZD')" align="center" :show-overflow-tooltip="true" key="isTop">
         <template slot-scope="scope">
-          <el-switch v-model="scope.row.isTop" :active-value="true" :inactive-value="false">
+          <el-switch v-model="scope.row.isTop" @change="switchChange(scope.row.id)" :active-value="true" :inactive-value="false">
           </el-switch>
         </template>
       </el-table-column>
@@ -72,9 +72,9 @@
           }}</el-button>
           <el-button  type="text"  @click="handleDelete(scope.row)">{{ $t('Delete')
           }}</el-button>
-          <el-button v-if="scope.row.status==0"  type="text"  @click="handleWork(scope.row)">{{ $t('ENA')
+          <el-button v-if="scope.row.status==0"  type="text"  @click="handleWork(scope.row,1)">{{ $t('ENA')
           }}</el-button>
-          <el-button v-if="scope.row.status==1"  type="text"  @click="handleSort(scope.row)">{{ $t('Dis')
+          <el-button v-if="scope.row.status==1"  type="text"  @click="handleWork(scope.row,0)">{{ $t('Dis')
           }}</el-button>
           <el-button  type="text"  @click="handleSort(scope.row)">{{ $t('Sorting')
           }}</el-button>
@@ -86,7 +86,7 @@
       @pagination="getList" />
 
     <!-- 添加或修改轮播图配置对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body :close-on-click-modal="false">
       <el-form ref="form" :model="form" :rules="rules" label-width="150px">
 
         <el-form-item :label="$t('ILL_PIC') + '：'" prop="image">
@@ -138,7 +138,7 @@
         }}</el-button>
       </div>
     </el-dialog>
-    <SortDialog ref="sort"></SortDialog>
+    <SortDialog ref="sort" @getList="getList"></SortDialog>
   </div>
 </template>
 
@@ -151,7 +151,7 @@ import {
   addApi,
   delApi,
   editApi,
-  exportApi,
+  toTop,
   detailApi,
 } from "@/api/slide";
 export default {
@@ -205,6 +205,7 @@ export default {
         ],
         status: [{ required: true, message: this.$t('BNWK'), trigger: "change" }],
       },
+      roleOptions:[]
     };
   },
 
@@ -228,9 +229,7 @@ export default {
         this.list = response.data.records;
         this.total = response.data.total;
         this.loading = false;
-        this.list.forEach((item) => {
-          item["image"] = [this.baseUrl + item.image];
-        });
+
       });
     },
     //链接方式
@@ -293,13 +292,16 @@ export default {
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
-      this.reset();
+
+        this.reset();
       const id = row.id
       detailApi(id).then((response) => {
         this.form = response.data;
         this.open = true;
         this.title = this.$t('Edit');
       });
+
+
     },
     /** 提交按钮 */
     submitForm() {
@@ -323,9 +325,9 @@ export default {
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      this.$confirm($t('QRSCM'), $t('Warning'), {
-        confirmButtonText: $t('Confirm'),
-        cancelButtonText: $t('Cancel'),
+      this.$confirm(this.$t('QRSCM'), this.$t('Warning'), {
+        confirmButtonText: this.$t('Confirm'),
+        cancelButtonText: this.$t('Cancel'),
         type: "warning",
       })
         .then(function () {
@@ -333,27 +335,41 @@ export default {
         })
         .then(() => {
           this.getList();
-          this.$modal.msgSuccess($t('OPERTATE_SUCCESS'));
+          this.$modal.msgSuccess(this.$t('OPERTATE_SUCCESS'));
         })
         .catch(() => { });
     },
-    handleWork() {
-      this.$confirm($t('QRTY'), $t('Warning'), {
-        confirmButtonText: $t('Confirm'),
-        cancelButtonText: $t('Cancel'),
+  // 停用 启用
+    handleWork(row,num) {
+      let form=row
+          form.status=num
+      this.$confirm(this.$t('QRTY'), this.$t('Warning'), {
+        confirmButtonText: this.$t('Confirm'),
+        cancelButtonText: this.$t('Cancel'),
         type: "warning",
       })
         .then(function () {
-          return delRotationChart({ ids: [row.id] });
+          return editApi(form);
         })
         .then(() => {
           this.getList();
-          this.$modal.msgSuccess($t('SCCCL'));
+          this.$modal.msgSuccess(this.$t('OPERTATE_SUCCESS'));
         })
         .catch(() => { });
     },
-    handleSort() {
-      this.$refs.sort.open()
+    // 排序
+    handleSort(form) {
+      this.$refs.sort.open(form)
+    },
+    // 置顶 取消置顶
+    switchChange(id){
+      toTop(id).then(res=>{
+
+          this.getList();
+          this.$modal.msgSuccess(this.$t('OPERTATE_SUCCESS'));
+
+
+      })
     }
   }
 };

@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <el-dialog :title="title" :visible.sync="show" width="580px" append-to-body>
+  <el-dialog :title="title" :visible.sync="show" width="580px" append-to-body :close-on-click-modal="false">
    <slot></slot>
     <div slot="footer" class="dialog-footer">
       <el-button @click="cancel">{{ $t("Cancel") }}</el-button>

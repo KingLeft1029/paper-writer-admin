@@ -35,7 +35,7 @@
     </div>
 
     <!-- 添加或修改用户配置对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body :close-on-click-modal="false">
       <el-form label-position="right" ref="form" :model="form" :rules="rules" label-width="180px">
         <el-row>
           <el-col :span="24">

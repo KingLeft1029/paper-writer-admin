@@ -319,4 +319,6 @@ export const en = {
   INK_TREND: "Reward Ink growth trend",
 
   MZZJ_TITLE: "Mespery Management System",
+  XTJYJBL:'Click the current confirmation and submit successfully. The newly submitted Share rate will take effect, and the historical Share rate will be invalid automatically, and withdrawals after the effective time will be deducted according to the current effective Share rate.',
+  XPZDEY:'Confirmed to submit a new configuration of Share rate'
 };

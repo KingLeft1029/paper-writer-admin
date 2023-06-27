@@ -40,32 +40,30 @@
 
       </el-row>
 
-      <el-table v-loading="loading" :default-sort="{ prop: 'date', order: 'descending' }" :data="userList"
-        @selection-change="handleSelectionChange" :row-class-name="tableRowClassName"
+      <el-table v-loading="loading" :default-sort="{ prop: 'date', order: 'descending' }" :data="list"
+
         :header-cell-style="{ 'background-color': '#EDF4FC' }">
 
-        <el-table-column :label="$t('CONFIG_P')" align="center" key="userId" prop="userId" />
+        <el-table-column :label="$t('CONFIG_P')" align="center"  prop="proportion" />
 
-        <el-table-column :label="$t('SHARE_TYPE')" align="center" key="nickName" prop="nickName" :show-overflow-tooltip="true" />
-        <el-table-column :label="$t('Operators')" align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('Status')" align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('EX_TIME')" sortable align="center" key="phonenumber" prop="phonenumber" />
-        <el-table-column :label="$t('EFF_TIME')" sortable align="center" key="phonenumber" prop="phonenumber" />
+        <el-table-column :label="$t('SHARE_TYPE')" align="center"  prop="type"  :formatter="formatter" :show-overflow-tooltip="true" />
+        <el-table-column :label="$t('Operators')" align="center"  prop="phonenumber" />
+        <el-table-column :label="$t('Status')" align="center"  prop="phonenumber" />
+        <el-table-column :label="$t('EX_TIME')" sortable align="center"  prop="phonenumber" />
+        <el-table-column :label="$t('EFF_TIME')" sortable align="center"  prop="phonenumber" />
       </el-table>
 
       <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
         @pagination="getList" />
     </div>
-    <addDialog ref="rate"></addDialog>
+    <addDialog ref="rate" getList="getList"></addDialog>
   </div>
 </template>
 
 <script>
 import {
-  listUser,
-  getUser,
-
-} from "@/api/system/user";
+  listApi
+} from "@/api/finace";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 import addDialog from "./add-dialog.vue"
@@ -77,36 +75,20 @@ export default {
     return {
       // 遮罩层
       loading: true,
-      // 选中数组
-      ids: [],
-      // 非单个禁用
-      single: true,
-      // 非多个禁用
-      multiple: true,
+
       // 显示搜索条件
       showSearch: true,
       // 总条数
       total: 0,
-      // 用户表格数据
-      userList: null,
+
       // 弹出层标题
       title: "",
       // 是否显示弹出层
       open: false,
-      // 部门名称
-      deptName: undefined,
-      // 默认密码
-      initPassword: undefined,
-      // 日期范围
-      postOptions: [],
-      // 角色选项
-      roleOptions: [],
+
       // 表单参数
       form: {},
-      defaultProps: {
-        children: "children",
-        label: "label",
-      },
+
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -119,104 +101,32 @@ export default {
         roleId: undefined,
       },
 
-      // 表单校验
-      rules: {
-        status: [
-          {
-            required: true,
-            message: this.$t("PLEASE_SELECT_WHETHER"),
-            trigger: "blur",
-          },
-        ],
-        userName: [
-          {
-            required: true,
-            message: this.$t("ACCOUNT_CANNOT"),
-            trigger: "blur",
-          },
-          {
-            min: 5,
-            max: 20,
-            message: this.$t("ACCOUNT_LENGTH"),
-            trigger: "blur",
-          },
-        ],
-        deptId: [
-          {
-            required: true,
-            message: this.$t("PLEASE_SELECT_ROLE"),
-            trigger: "blur",
-          },
-        ],
-        nickName: [
-          {
-            required: true,
-            message: this.$t("USER_NAME_CANNOT"),
-            trigger: "blur",
-          },
-        ],
-        password: [
-          {
-            required: true,
-            message: this.$t("PASSWORD_CANNOT"),
-            trigger: "blur",
-          },
-          {
-            min: 5,
-            max: 20,
-            message: this.$t("PASSWORD_LENGTH"),
-            trigger: "blur",
-          },
-        ],
-        email: [
-          {
-            type: "email",
-            message: this.$t("PLEASE_INPUT_EMAIL_ADDRESS"),
-            trigger: ["blur", "change"],
-          },
-        ],
-        phonenumber: [
-          {
-            required: true,
-            message: this.$t("PHONE_NUMBER_CANNOT"),
-            trigger: "blur",
-          },
-          {
-            pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
-            message: this.$t("PLEASE_INPUT_CORRECT_PHONE"),
-            trigger: "blur",
-          },
-        ],
-      },
+
     };
   },
-  watch: {
-    // 根据名称筛选部门树
-    deptName(val) {
-      this.$refs.tree.filter(val);
-    },
-  },
+
   created() {
     this.getList();
 
 
   },
   methods: {
-    tableRowClassName({ row, rowIndex }) {
-      if (rowIndex % 2) {
-        return "warning-row";
-      } else {
-        return "";
-      }
+    formatter(row){
+     let val=''
+     if(row.type==1){
+      val=this.$t('Threads')
+     }else{
+      val=this.$t('Videos')
+     }
+     return val
     },
     /** 查询用户列表 */
     getList() {
       this.loading = true;
-      listUser(this.addDateRange(this.queryParams, this.dateRange)).then(
+      listApi(this.addDateRange(this.queryParams, this.dateRange)).then(
         (response) => {
-          this.userList = response.rows;
-          this.total = response.total;
-
+          this.list = response.data.records;
+          this.total = response.data.total;
           this.loading = false;
         }
       );

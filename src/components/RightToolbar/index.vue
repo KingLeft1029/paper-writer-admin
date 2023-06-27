@@ -11,7 +11,7 @@
         <el-button  circle icon="el-icon-menu" @click="showColumn()" />
       </el-tooltip>
     </el-row>
-    <el-dialog :title="title" :visible.sync="open" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" append-to-body :close-on-click-modal="false">
       <el-transfer
         :titles="['显示', '隐藏']"
         v-model="value"

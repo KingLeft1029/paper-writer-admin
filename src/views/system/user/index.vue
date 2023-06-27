@@ -230,7 +230,7 @@
       :title="title"
       :visible.sync="open"
       width="750px"
-      append-to-body
+      append-to-body :close-on-click-modal="false"
     >
       <el-form
         label-position="right"

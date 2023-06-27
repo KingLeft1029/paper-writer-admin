@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查
 export function listApi(query) {
   return request({
-    url: '/business/chart/list',
+    url: '/business/percentage/list',
     method: 'get',
     params: query
   })
@@ -11,7 +11,7 @@ export function listApi(query) {
 // 增
 export function addApi(data) {
   return request({
-    url: '/business/chart',
+    url: '/business/percentage',
     method: 'post',
     data,
   })
@@ -20,7 +20,7 @@ export function addApi(data) {
 // 删
 export function delApi(ids) {
   return request({
-    url: '/business/chart/' + ids,
+    url: '/business/percentage/' + ids,
     method: 'delete'
   })
 }
@@ -28,7 +28,7 @@ export function delApi(ids) {
 // 修改
 export function editApi(data) {
   return request({
-    url: '/business/chart',
+    url: '/business/percentage',
     method: 'put',
     data: data
   })
@@ -36,7 +36,7 @@ export function editApi(data) {
 // 导出
 export function exportApi(query) {
   return request({
-    url: '/business/chart/export',
+    url: '/business/recommendations/export',
     method: 'get',
     params: query
   })
@@ -44,14 +44,7 @@ export function exportApi(query) {
 // 详细信息
 export function detailApi(id) {
   return request({
-    url: '/business/chart/'+id,
-    method: 'get'
-  })
-}
-// 置顶-取消置顶
-export function toTop(id) {
-  return request({
-    url: '/business/chart/toTop/'+id,
+    url: '/business/recommendations/'+id,
     method: 'get'
   })
 }

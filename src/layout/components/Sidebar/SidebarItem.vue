@@ -27,7 +27,7 @@
       v-else
       ref="subMenu"
       :index="resolvePath(item.path)"
-      popper-append-to-body
+      popper-append-to-body :close-on-click-modal="false"
     >
       <template slot="title">
         <item

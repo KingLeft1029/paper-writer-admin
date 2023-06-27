@@ -89,7 +89,7 @@
     </div>
 
     <!-- 添加或修改用户配置对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="900px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="900px" append-to-body :close-on-click-modal="false">
       <el-form label-position="right" ref="form" :model="form" :rules="rules" label-width="180px">
         <el-form-item :label="$t('Name') + '：'" prop="name">
           <el-input v-model="form.name" :placeholder="$t('Enter')" style="width:320px" maxlength="30" />
