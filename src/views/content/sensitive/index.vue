@@ -75,7 +75,7 @@
     <!-- 添加或修改用户配置对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="900px" append-to-body :close-on-click-modal="false">
       <div class="dialog-box">
-        <el-form label-position="right" ref="form" :model="form" :rules="rules" label-width="130px">
+        <el-form label-position="right" ref="form" :model="form" :rules="rules" label-width="150px">
           <el-form-item :label="$t('SEN_WORD') + '：'" prop="word">
             <el-input v-model="form.word" :placeholder="$t('shit')" type="textarea" :rows="10" maxlength="200"
               show-word-limit />
